@@ -1,0 +1,51 @@
+
+{% extends 'admin/basesp.html' %}
+{% block body %}
+<form class="form-inline" action="/category/themsanpham" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label>Name</label>
+        <input type="text" id="name" name="name" class="form-control" style="width:30%;" required="required"/>
+    </div>
+    <div class="mb-3">
+        <label>Slug</label>
+        <input type="text" id="slug" name="slug" class="form-control" style="width:30%;"/>
+    </div>
+    <div class="mb-3">
+        <label>Price</label>
+        <input type="text" id="price" name="price" class="form-control" style="width:30%;" required="required"/>
+    </div>
+    <div class="mb-3">
+        <label>Image</label>
+        <input type="file" name="image" id="id_image"/>
+    </div>
+    <div class="mb-3">
+        <label>Số lượng</label>
+        <input type="text" id="so-luong" name="so-luong" class="form-control" style="width:30%;" required="required"/>
+    </div>
+    <div class="mb-3">
+        <label>Mô tả</label>
+        <textarea name="mo-ta" cols="40" rows="10" class="form-control" required="required" id="mo-ta"></textarea>
+    </div>
+    <div class="mb-3">
+        <label>Nhà cung cấp</label>
+        <input type="text" id="nha-cung-cap" name="nha-cung-cap" class="form-control" style="width:30%;" required="required"/>
+    </div>
+
+    <div class="mb-3">
+        <label>Thể loại</label>
+        <select name="theloai">
+            <option value="">----Hãy chọn-----</option>
+            {% for tl in category_list %}
+                <option value={{tl.slug}}>{{tl.name}}</option>
+            {% endfor %}
+        </select></br>
+    </div>
+
+    <div class="mb-3">
+        <input type="submit" name="create" value="create" class="form-control">
+    </div>
+</form>
+<br />
+<div id="result"></div>
+{% endblock %}

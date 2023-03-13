@@ -1,0 +1,53 @@
+{% extends 'admin/basesp.html' %}
+{% block body %}
+    <form class="form-inline" action="/category/suasp" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" name="id_product" id="product" value="{{ product.id }}"/>
+        <div class="mb-3">
+        <label>Name</label>
+        <input type="text" id="name" name="name" class="form-control" style="width:30%;" required="required" value="{{ product.name }}"/>
+    </div>
+    <div class="mb-3">
+        <label>Slug</label>
+        <input type="text" id="slug" name="slug" class="form-control" style="width:30%;" value="{{ product.slug }}"/>
+    </div>
+    <div class="mb-3">
+        <label>Price</label>
+        <input type="text" id="price" name="price" class="form-control" style="width:30%;" required="required" value="{{ product.price }}"/>
+    </div>
+    <div class="mb-3">
+        <label>Image</label>
+        <input type="file" name="image" id="id_image" value="{{ product.image.url }}" accept="image/*"/>
+    </div>
+    <div class="mb-3">
+        <label>Số lượng</label>
+        <input type="text" id="so-luong" name="so-luong" class="form-control" style="width:30%;" required="required" value="{{ product.quantity }}"/>
+    </div>
+    <div class="mb-3">
+        <label>Mô tả</label>
+        <textarea name="mo-ta" cols="40" rows="10" class="form-control" required="required" id="mo-ta">{{ product.description }}</textarea>
+    </div>
+    <div class="mb-3">
+        <label>Nhà cung cấp</label>
+        <input type="text" id="nha-cung-cap" name="nha-cung-cap" class="form-control" style="width:30%;" required="required" value="{{ product.publisher }}"/>
+    </div>
+
+    <div class="mb-3">
+        <label>Thể loại</label>
+        <select name="theloai">
+            <option value="">----Hãy chọn-----</option>
+            {% for tl in category_list %}
+                {% if product.categories.first.slug == tl.slug %}
+                    <option value={{tl.slug}} selected>{{tl.name}}</option>
+                {% else %}
+                    <option value={{tl.slug}}>{{tl.name}}</option>
+                {% endif %}
+            {% endfor %}
+        </select></br>
+    </div>
+
+    <div class="mb-3">
+        <input type="submit" name="create" value="create" class="form-control">
+    </div>
+    </form>
+{% endblock %}

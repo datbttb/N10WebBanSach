@@ -1,0 +1,33 @@
+{% extends "admin/basesp.html" %}
+
+{% block body %}
+ <div class="col-md-12">
+        <span><a href="/category/create/" class="btn btn-primary">Add New Record</a></span>
+        <div class="table-responsive">
+        <table id="bootstrapdatatable" class="table table-striped table-bordered" width="100%">
+        <thead>
+            <th><input type="checkbox" id="checkall" /></th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Category</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </thead>
+        <tbody>
+        {% for sanpham in sanpham_list %}
+            <tr>
+            <td><input type="checkbox" class="checkthis" /></td>
+            <td>{{ sanpham.name }}</td>
+            <td>{{ sanpham.price }}</td>
+            <td>{{ sanpham.quantity }}</td>
+            <td>{{ sanpham.categories.first.name }}</td>
+            <td><a href="/category/edit/{{ sanpham.id }}" class="btn btn-primary">Edit</a></td>
+            <td><a href="/category/delete/{{ sanpham.id }}" class="btn btn-danger">Delete</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+        </div>
+    </div>
+{% endblock body %}
